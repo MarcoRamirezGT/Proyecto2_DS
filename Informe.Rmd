@@ -210,6 +210,17 @@ rbind(
 d<-get_nrc_sentiment(db$discourse_text)
 # head(d,10) - to see top 10 lines of the get_nrc_sentiment dataframe
 head (d,10)
+db$Enojo<- d$anger
+db$Anticipacion<- d$anticipation
+db$Disgusto<- d$disgust
+db$Miedo<- d$fear
+db$Felicidad<- d$joy
+db$Tristeza<- d$sadness
+db$Sorpresa<- d$surprise
+db$Verdad<- d$trust
+db$Negativo<- d$negative
+db$Positivo<- d$positive
+
 
 
 #transpose
@@ -234,6 +245,41 @@ barplot(
   main = "Emotions in Text", xlab="Percentage"
 )
 ```
+
+<br/>
+Como se observa en las graficas anterior, mas del 25% de los ensayos de los estudiantes logran transmitir la verdad. Mas del 15% logra transmitir anticipacion y mas del 10% logran transmitir felicidad, ademas, se observa que los sentimientos mas bajos son sorpresa, enojo y disgusto. 
+
+```{r}
+ineficiente<-subset(db, db$discourse_effectiveness=="Ineffective")
+summary(ineficiente)
+Efectivo<-subset(db, db$discourse_effectiveness=="Effective")
+summary(Efectivo)
+Adecuado<-subset(db, db$discourse_effectiveness=="Adequate")
+summary(Adecuado)
+
+
+```
+
+```{r}
+resumen<-data.frame(Categoria= c("Ineficiente","Adecuado","Eficiente"),
+                    Enojo= c(mean(ineficiente$Enojo),mean(Adecuado$Enojo),mean(Efectivo$Enojo)),
+                    Anticipacion= c(mean(ineficiente$Anticipacion),mean(Adecuado$Anticipacion),mean(Efectivo$Anticipacion)),
+                    Disgusto= c(mean(ineficiente$Disgusto),mean(Adecuado$Disgusto),mean(Efectivo$Disgusto)),
+                    Miedo= c(mean(ineficiente$Miedo),mean(Adecuado$Miedo),mean(Efectivo$Miedo)),
+                    Felicidad= c(mean(ineficiente$Felicidad),mean(Adecuado$Felicidad),mean(Efectivo$Felicidad)),
+                    Tristeza= c(mean(ineficiente$Tristeza),mean(Adecuado$Tristeza),mean(Efectivo$Tristeza)),
+                    Sorpresa= c(mean(ineficiente$Sorpresa),mean(Adecuado$Sorpresa),mean(Efectivo$Sorpresa)),
+                    Verdad= c(mean(ineficiente$Verdad),mean(Adecuado$Verdad),mean(Efectivo$Verdad)),
+                    Negativo= c(mean(ineficiente$Negativo),mean(Adecuado$Negativo),mean(Efectivo$Negativo)),
+                    Positivo= c(mean(ineficiente$Positivo),mean(Adecuado$Positivo),mean(Efectivo$Positivo))
+                    
+                    )
+
+resumen
+```
+<br/>
+Como se observa los argumentos mas eficientes es cuando poseen mas sentimiento, ya que como se observa anteriormente, la categoria de eficiente lidera en todos los sentimientos, dando a entender que el texto logra expresar de manera eficiente lo que el autor quiere explicar.
+
 
 ### Conclusiones y hallazgos
 
