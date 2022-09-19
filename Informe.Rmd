@@ -123,7 +123,7 @@ Como se observa, los 3 tipos de efectividad no se encuentran balanceados, ademas
 #### Analisis del los discursos
 
 ##### Analisis del discurso sin limpieza
-```{R}
+```{R warning=FALSE}
 
 wordcloud(words = db$discourse_text, 
           max.words=100, random.order=FALSE, rot.per=0.40, 
@@ -137,7 +137,7 @@ Como se observa en la mayoria de discursos, la palabra con mayor frecuencia es e
 
 Ahora veremos como se ve una nube de palabras con una limpieza de datos.
 
-```{r}
+```{r warning=FALSE}
 
 TextDoc <- Corpus(VectorSource(db$discourse_text))
 #Replacing "/", "@" and "|" with space
@@ -183,7 +183,7 @@ Como se observa la palabra *Student* sigue predominando en los discursos de los 
 
 ##### Analisis de sentimiento en los discursos
 
-```{r}
+```{r warning=FALSE}
 
 syuzhet_vector <- get_sentiment(db$discourse_text, method="syuzhet")
 # see the first row of the vector
