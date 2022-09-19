@@ -21,12 +21,12 @@ que escriban de manera persuasiva, si quitamos ese 13% de alumnos que llegan a t
 sus habilidades, si bien es cierto que a dia de hoy existe una cantidad abundante de herramientas en linea que permiten una retroalimentacion automatizada, no llega 
 a similar ni siquiera igualar, la practica que se adquiere mediante el metodo tradicional. 
 
-Por tanto, nos topamos con el problema de que no todos desarrollan una calidad aceptable de elementos argumentativos, desarrollo de ideas o la organizacion de ideas, por lo tanto, se estable una investigacion para determinar la calidad de los argumentos, en base a su efectividad. 
 
 
 ### Problema cientifico
 
-Validadacion y calificacion de la efectividad de los argumentos encontrada en los representantes de Sexto a Doceavo grado. 
+
+Por tanto, nos topamos con el problema de que no todos desarrollan una calidad aceptable de elementos argumentativos, desarrollo de ideas o la organizacion de ideas, por lo tanto, se estable una investigacion para determinar la calidad de los argumentos, en base a su efectividad. 
 
 ### Objetivos
 
@@ -40,7 +40,7 @@ Validadacion y calificacion de la efectividad de los argumentos encontrada en lo
 
 **- Obetivos especificos: **
 
-1. Identificar y catalogar discurosos como **Ineficaz** , **Adeacuado** o **Eficaz**
+1. Catalogar discurosos como **Ineficaz** , **Adeacuado** o **Eficaz**
 
 
 2. Identificar los sentimientos obtenidos en base a los discursos realizados. 
