@@ -280,6 +280,37 @@ resumen
 <br/>
 Como se observa los argumentos mas eficientes es cuando poseen mas sentimiento, ya que como se observa anteriormente, la categoria de eficiente lidera en todos los sentimientos, dando a entender que el texto logra expresar de manera eficiente lo que el autor quiere explicar.
 
+##### Cantidad de palabras
+
+```{r}
+require(stringr)
+
+db<-read.csv("train.csv")
+
+db$CantidadPalabras<-str_count(db$discourse_text, '\\w+')
+
+ineficiente<-subset(db, db$discourse_effectiveness=="Ineffective")
+
+Efectivo<-subset(db, db$discourse_effectiveness=="Effective")
+
+Adecuado<-subset(db, db$discourse_effectiveness=="Adequate")
+
+resumen<-data.frame(Categoria= c("Ineficiente","Adecuado","Eficiente"),
+                    Promedio=c(mean(ineficiente$CantidadPalabras),mean(Efectivo$CantidadPalabras),mean(Adecuado$CantidadPalabras)))
+
+ggplot(data=resumen, aes(x=reorder(Categoria,Promedio), y=Promedio,fill=Categoria)) +
+  geom_bar(stat="identity", position=position_dodge())+
+  geom_text(aes(label=Promedio), vjust=1.6, color="black",
+            position = position_dodge(0.9), size=3.5)+
+  labs(title="Promedio de palabras de cada categoria",x='Categoria', y="Promedio")+
+  theme(legend.position="none")
+
+```
+<br/>
+Como se observa en la grafica anterior, que un discurso o texto tenga mas cantidad de palabra, no significa que sera mas comprensible o en este caso mas eficiente. Evidenciando que cantidad no significa calidad.
 
 ### Conclusiones y hallazgos
 
+1. Los argumentos con mejor escritura, uso de verbos y sobre todo uso correcto de las palabras, tienden a expresar mas sentimientos en su escritura, facilitando a los lectores comprender al autor.
+2. Un argumento demasiado positivo no significa que sera eficiente.
+3. Que un discurso tenga demasiadas palabras no signfica que sera eficiente o de mejor comprension.
