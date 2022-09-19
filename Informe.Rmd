@@ -16,15 +16,41 @@ El objetivo de este proyecto es clasificar los elementos argumentativos en la es
 
 ### Situacion problematica
 
+Partimos de la base, que una escrituta argumentativa ayuda a el crecimiento del pensamiento critito, dicho eso, solo el 13% de los catedraticos piden a sus alumnos 
+que escriban de manera persuasiva, si quitamos ese 13% de alumnos que llegan a tener esa practica constante, resulta una cantidad de jovenes que no logran fomentar 
+sus habilidades, si bien es cierto que a dia de hoy existe una cantidad abundante de herramientas en linea que permiten una retroalimentacion automatizada, no llega 
+a similar ni siquiera igualar, la practica que se adquiere mediante el metodo tradicional. 
+
+Por tanto, nos topamos con el problema de que no todos desarrollan una calidad aceptable de elementos argumentativos, desarrollo de ideas o la organizacion de ideas, por lo tanto, se estable una investigacion para determinar la calidad de los argumentos, en base a su efectividad. 
+
+
 ### Problema cientifico
 
+Validadacion y calificacion de la efectividad de los argumentos encontrada en los representantes de Sexto a Doceavo grado. 
+
 ### Objetivos
+
+**- Objetivos generales: ** 
+
+1. Catalogar los argumentos en base a su efectividad.  
+
+
+2. Determinar el tipo de discurso con mayor efectividad. 
+
+
+**- Obetivos especificos: **
+
+1. Identificar y catalogar discurosos como **Ineficaz** , **Adeacuado** o **Eficaz**
+
+
+2. Identificar los sentimientos obtenidos en base a los discursos realizados. 
+
 
 ### Descripcion de los datos
 
 ### Analisis Exploratorio
 
-```{r Aanalisis Exploratorio}
+```{r Analisis Exploratorio}
 
 db<- read.csv('train.csv')
 
@@ -67,7 +93,9 @@ ggplot(data=disType, aes(x=reorder(Tipo,Cantidad), y=Cantidad,fill=Tipo)) +
   labs(title="Cantidad de cada tipo de discurso",x='Tipo de discurso', y="Cantidad")+
   theme(legend.position="none")
 ```
-<br /> 
+
+
+
 Como se observa en la grafica anterior el tipo de discurso predominante es 'Evidence', el cual se refiere a ideas o ejemplos que respaldan afirmaciones, reconvenciones o refutaciones. Y en en segundo puesto se encuentra 'Claim', el cual es un reclamo que respalda alguna posicion. 
 
 
