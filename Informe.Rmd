@@ -48,14 +48,46 @@ Validadacion y calificacion de la efectividad de los argumentos encontrada en lo
 
 ### Descripcion de los datos
 
-### Analisis Exploratorio
-
 ```{r Analisis Exploratorio}
 
 db<- read.csv('train.csv')
 
 
 ```
+
+El conjunto de datos contiene ensayos argumentativos escritos por estudiantes estadounidenses en los grados 6-12. Estos ensayos fueron anotados por calificadores expertos para los elementos del discurso que se encuentran comúnmente en la escritura argumentativa:
+
+-Lead: una introducción que comienza con una estadística, una cita, una descripción o algún otro dispositivo para captar la atención del lector y apuntar hacia la tesis.
+
+-Position: una opinión o conclusión sobre la pregunta principal.
+
+-Claim: un reclamo que respalda la posición.
+
+-Counterclaim: una afirmación que refuta otra afirmación o da una razón opuesta a la posición.
+
+-Rebuttal: una afirmación que refuta una contrademanda.
+
+-Evidence: ideas o ejemplos que respaldan afirmaciones, reconvenciones o refutaciones.
+
+-Concluding Statement: una declaración de conclusión que reafirma las afirmaciones.
+
+#### Descripción del dataframe
+
+-discourse_id: código de identificación para el elemento de discurso. Variable categórica.
+-essay_id: código de identificación para la respuesta del ensayo. Variable categórica.
+-discourse_text: texto del elemento del discurso. Variable categórica.
+-discourse_type: etiqueta de clase del elemento de discurso. Variable categórica.
+-discourse_effectiveness: calificación de la calidad del elemento del discurso, el objetivo. Variable categórica.
+
+#### Representación gráfica de los datos
+
+```{r}
+plot(x = db$discourse_id)
+plot(x = db$essay_id)
+```
+
+### Analisis Exploratorio
+
 La base de datos cuenta con `r nrow(db)` filas y `r ncol(db)` columnas
 
 
