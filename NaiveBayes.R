@@ -35,7 +35,7 @@ set.seed(123)
 corte <- sample(nrow(text_dtm),nrow(text_dtm)*porcentaje)
 
 train <- text_dtm[corte,] # 70% for training
-test <- text_dtm[-corte, ] # 20% for testing
+test <- text_dtm[-corte, ] # 30% for testing
 train_type <- db[corte, ]$Tag
 test_type <- db[-corte, ]$Tag
 
@@ -76,7 +76,6 @@ CrossTable(test_prediction, test_type,
            dnn = c('predicted', 'actual'))
 
 #Modelo 2
-#laplace assures that one word is not mislabled just because it appeared once on ham/spam texts
 sms_classifier_improved <- naiveBayes(train, train_type, laplace = 1)
 test_prediction_improved <- predict(sms_classifier_improved, test)
 
