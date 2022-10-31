@@ -1,5 +1,5 @@
 ---
-title: "Informe_2"
+title: "Proyecto 2. Resultados Parciales y Visualizaciones Estáticas"
 author: "Marco Ramirez, Estuardo Hernandez, Alfredo Quezada"
 date: "2022-10-31"
 output: html_document
@@ -13,7 +13,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ### Naive Bayes
 
-El algoritmo clasificador Naïve-Bayes (NBC), es un clasificador probabilístico simple con fuerte suposición de independencia. Aunque la suposición de la independencia de los atributos es generalmente una suposición pobre y se viola a menudo para los conjuntos de datos verdaderos. A menudo proporciona una mejor precisión de clasificación en conjuntos de datos en tiempo real que cualquier otro clasificador. También requiere una pequeña cantidad de datos de entrenamiento. El clasificador Naïve-Bayes aprende de los datos de entrenamiento y luego predice la clase de la instancia de prueba con la mayor probabilidad posterior. También es útil para datos dimensionales altos ya que la probabilidad de cada atributo se estima independientemente.
+El algoritmo clasificador Naïve-Bayes (NBC), es un clasificador probabilístico simple con fuerte suposición de independencia. Aunque la suposición de la independencia de los atributos es generalmente una suposición pobre y se viola a menudo para los conjuntos de datos verdaderos. A menudo proporciona una mejor precisión de clasificación en conjuntos de datos en tiempo real que cualquier otro clasificador. También requiere una pequeña cantidad de datos de entrenamiento. El clasificador Naïve-Bayes aprende de los datos de entrenamiento y luego predice la clase de la instancia de prueba con la mayor probabilidad posterior. También es útil para datos dimensionales altos ya que la probabilidad de cada atributo se estima independientemente (Medium, 2019).
 
 Las ventajas del modelo Naive Bayes son:
 
@@ -21,16 +21,20 @@ Las ventajas del modelo Naive Bayes son:
 - Naive Bayes requiere una pequeña cantidad de datos de entrenamiento para estimar los datos de las pruebas.
 - Menos esfuerzo de preparación de datos.
 
+(Medium, 2019)
+
 Las desventajas del modelo Naive Bayes son:
 
 - Tiene la fuerte hipótesis de independencia variable.
 - Si la variable categórica tiene una categoría en el conjunto de datos de prueba, que no se observó en el conjunto de datos de entrenamiento, entonces el modelo asignará una probabilidad 0 (cero). En este caso, debe añadirse una unidad de cada conjunto de datos.
 
+(Medium, 2019)
+
 ### Gaussian Naive Bayes
 
 Uno de los tipos de clasificadores más populares es el llamado en inglés Gaussian Naive Bayes Classifier. Este toma en cuenta la probabilidad, la verosimilitud y la probabilidad marginal. Los nombres Gaussian y Naive del algoritmo vienen de dos suposiciones:
 - Asumimos que las características de la verosimilitud no estan correlacionada entre ellas. Como no es siempre cierto y es una suposición ingenua es que aparece en el nombre “naive bayes”.
-- Asumimos que el valor de las características tendrá una distribución normal (gaussiana). Esto nos permite calcular cada parte usando la función de probabilidad de densidad normal.
+- Asumimos que el valor de las características tendrá una distribución normal (gaussiana). Esto nos permite calcular cada parte usando la función de probabilidad de densidad normal (Aprende Machine Learning, 2017).
 
 Las ventajas del modelo Gaussian Naive Bayes son:
 
@@ -40,23 +44,27 @@ Las ventajas del modelo Gaussian Naive Bayes son:
 - Va bien con muchas dimensiones (features).
 - Llega a dar buenos resultados aún siendo “ingenuo” sin que se cumplan todas las condiciones de distribución necesarias en los datos.
 
+(Aprende Machine Learning, 2017)
+
 Las desventajas del modelo Gaussian Naive Bayes son:
 
 - Requiere quitar las dimensiones con correlación.
 - Para buenos resultados las entradas deberían cumplir las 2 suposiciones de distribución normal e independencia entre sí (muy difícil que sea así ó deberíamos hacer transformaciones en lo datos de entrada).
 
+(Aprende Machine Learning, 2017)
+
 ### Multinomial Naive Bayes
 
-El clasificador multinomial Naive Bayes es adecuado para la clasificación con características discretas, por ejemplo, recuento de palabras para la clasificación de texto. La distribución multinomial normalmente requiere recuentos de características de enteros. Sin embargo, en la práctica, los recuentos fraccionarios también pueden funcionar.
+El clasificador multinomial Naive Bayes es adecuado para la clasificación con características discretas, por ejemplo, recuento de palabras para la clasificación de texto. La distribución multinomial normalmente requiere recuentos de características de enteros. Sin embargo, en la práctica, los recuentos fraccionarios también pueden funcionar (Anguiano, 2009).
 
 Se usa ampliamente para asignar documentos a clases en función del análisis estadístico de sus contenidos. Proporciona una alternativa al análisis semántico "pesado" basado en IA y simplifica drásticamente la clasificación de datos textuales. La clasificación tiene como objetivo asignar fragmentos de texto (es decir,
-documentos) a clases determinando la probabilidad de que un documento pertenezca a la clase de otros documentos que tengan el mismo asunto.
+documentos) a clases determinando la probabilidad de que un documento pertenezca a la clase de otros documentos que tengan el mismo asunto (Anguiano, 2009).
 
 ### Bayesian Network
 
-Es un modelo grafo probabilístico, un tipo de modelo estático, que representa un conjunto de variables aleatorias y sus dependencias condicionales a través de un grafo acíclico dirigido (DAG por sus siglas en inglés). Por ejemplo, una red bayesiana puede representar las relaciones probabilísticas entre enfermedades y síntomas. Dados los síntomas, la red puede ser usada para computar la probabilidad de la presencia de varias enfermedades.
+Es un modelo grafo probabilístico, un tipo de modelo estático, que representa un conjunto de variables aleatorias y sus dependencias condicionales a través de un grafo acíclico dirigido (DAG por sus siglas en inglés). Por ejemplo, una red bayesiana puede representar las relaciones probabilísticas entre enfermedades y síntomas. Dados los síntomas, la red puede ser usada para computar la probabilidad de la presencia de varias enfermedades (Gal, 2007).
 
-Formalmente, las redes bayesianas son grafos dirigidos acíclicos cuyos nodos representan variables aleatorias en el sentido de Bayes: las mismas pueden ser cantidades observables, variables latentes, parámetros desconocidos o hipótesis. Las aristas representan dependencias condicionales; los nodos que no se encuentran conectados representan variables las cuales son condicionalmente independientes de las otras. Cada nodo tiene asociado una función de probabilidad que toma como entrada un conjunto particular de valores de las variables padres del nodo y devuelve la probabilidad de la variable representada por el nodo.
+Formalmente, las redes bayesianas son grafos dirigidos acíclicos cuyos nodos representan variables aleatorias en el sentido de Bayes: las mismas pueden ser cantidades observables, variables latentes, parámetros desconocidos o hipótesis. Las aristas representan dependencias condicionales; los nodos que no se encuentran conectados representan variables las cuales son condicionalmente independientes de las otras. Cada nodo tiene asociado una función de probabilidad que toma como entrada un conjunto particular de valores de las variables padres del nodo y devuelve la probabilidad de la variable representada por el nodo (Gal, 2007).
 
 Las ventajas del modelo Bayesian Network son:
 
@@ -66,14 +74,32 @@ Las ventajas del modelo Bayesian Network son:
 - La red puede actualizarse rápidamente o modificarse por cambios en la información o un mal desempeño.
 - Pueden utilizarse para anális de “Que pasa si”, para analizar la sensibilidad de las predicciones, o conclusiones respecto de los supuestos iniciales.
 
+(Gal, 2007)
+
 Las desventajas del modelo Bayesian Network son:
 
 - Las Redes Bayesianas tienen la desventaja de que el modelo es bueno tanto como el que modela lo sea y la percepción que tengan los expertos de la realidad.
 - Otra limitación se relaciona con el hecho de que la utilidad de las RBs está basada en la confiabilidad de la información a priori. Un expectativa demasiado optimista o pesimista de las creencias a priori pueden ya sea distorsionar la red o invalidar los resultados. Seleccionar una apropiada distribución de los datos tiene un importante efecto en la calidad de los resultados de la red.
 
+(Gal, 2007)
+
+### Referencias
+
+Aprende Machine Learning. (4 de Noviembre de 2017). Principales Algoritmos Usado en Machine Learning. Obtenido de https://www.aprendemachinelearning.com/principales-algoritmos-usados-en-machine-learning/
+
+freeCodeCamp. (28 de Abril de 2021). Cómo funcionan los clasificadores Naive Bayes. Obtenido de https://www.freecodecamp.org/espanol/news/como-funcionan-los-clasificadores-naive-bayes-con-ejemplos-de-codigo-de-python/
+
+Medium. (25 de Abril de 2019). Algoritmos Naive Bayes: Fundamentos e Implementación. Obtenido de https://medium.com/datos-y-ciencia/algoritmos-naive-bayes-fudamentos-e-implementación-4bcb24b307f
+
+Anguiano, E. (29 de Abril de 2009). Naive Bayes Multinomial para Clasificación de Texto Usando un Esquema de Pesado por Clases. México.
+
+Ben Gal I (2007). Redes bayesianas. En Ruggeri F, Kennett RS, Faltin FW (eds.). Página de soporte. Enciclopedia de Estadísticas en Calidad y Confiabilidad. John Wiley & Sons.
+
+Borgelt C, Kruse R (marzo de 2002). Modelos gráficos: métodos de análisis y minería de datos. Chichester, Reino Unido : Wiley.
+
 ## Algoritmos y modelos seleccionados
 
-Naive Bayes.
+Naive Bayes porque es el más simple en cuanto a clasificación de texto. Además de su fácil implementación. También porque estamos familiarizados con el teorema de Naive Bayes.
 
 ## Construcción de modelos
 
@@ -166,6 +192,7 @@ CrossTable(test_prediction_improved, test_type,
 
 
 ```
+
 ## Prueba de los modelos
 
 
@@ -178,4 +205,28 @@ Los NBC escalan muy bien, lo que significa que podemos agregar muchas más funci
 
 ## Visualizaciones estáticas
 
+```{r include=FALSE}
+spamText <- subset(db, Tag == "Adequate") 
 
+hamText <- subset(db, Tag =="Ineffective")
+
+amText <- subset(db, Tag =="Effective")
+```
+
+Frecuencia de las palabras en los argumentos que son clasificados como "Adequate" representada en una nube de palabras.
+
+```{r message=FALSE, warning=FALSE}
+wordcloud(spamText$Msg, max.words = 50, scale = c(5, 0.3),random.order = FALSE, rot.per = 0.15, colors = brewer.pal(8, "Dark2"))
+```
+
+Frecuencia de las palabras en los argumentos que son clasificados como "Effective" representada en una nube de palabras.
+
+```{r message=FALSE, warning=FALSE}
+wordcloud(amText$Msg, max.words = 50, scale = c(5, 0.3),random.order = FALSE, rot.per = 0.15, colors = brewer.pal(8, "Dark2"))
+```
+
+Frecuencia de las palabras en los argumentos que son clasificados como "Ineffective" representada en una nube de palabras.
+
+```{r message=FALSE, warning=FALSE}
+wordcloud(hamText$Msg, max.words = 50, scale = c(5, 0.3),random.order = FALSE, rot.per = 0.15, colors = brewer.pal(8, "Dark2"))
+```
