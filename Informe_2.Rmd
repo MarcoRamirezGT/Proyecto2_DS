@@ -193,8 +193,6 @@ CrossTable(test_prediction_improved, test_type,
 
 ```
 
-## Prueba de los modelos
-
 
 
 ## Discusión
