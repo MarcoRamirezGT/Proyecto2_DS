@@ -10,8 +10,13 @@ library(gmodels) #provides CrossTable() function for comparison
 
 db<-read.csv('train.csv')
 
+test_txt<-"though some say that life on Mars does exist, I think that there is no life on Mars."
+
+
 db<-db[,c(3,5)]
 colnames(db)<-c('Msg','Tag')
+db[nrow(db)+1,]<-c(test_txt,'Ineffective')
+
 
 db$Tag<-factor(db$Tag)
 # creating our corpus
@@ -46,14 +51,14 @@ tbl_train <- prop.table(table(train_type))
 #testing portion
 tbl_test <- prop.table(table(test_type))
 
-spamText <- subset(db, Tag == "Adequate") 
-wordcloud(spamText$Msg, max.words = 50, scale = c(5, 0.3),random.order = FALSE, rot.per = 0.15, colors = brewer.pal(8, "Dark2") )
-
-hamText <- subset(db, Tag =="Ineffective") # selecting ham texts
-wordcloud(hamText$Msg, max.words = 50, scale = c(5, 0.3),random.order = FALSE, rot.per = 0.15, colors = brewer.pal(8, "Dark2"))
+# spamText <- subset(db, Tag == "Adequate") 
+# wordcloud(spamText$Msg, max.words = 50, scale = c(5, 0.3),random.order = FALSE, rot.per = 0.15, colors = brewer.pal(8, "Dark2") )
+# 
+# hamText <- subset(db, Tag =="Ineffective") # selecting ham texts
+# wordcloud(hamText$Msg, max.words = 50, scale = c(5, 0.3),random.order = FALSE, rot.per = 0.15, colors = brewer.pal(8, "Dark2"))
 
 freq_words <- findFreqTerms(train, 5) 
-str(freq_words)
+
 
 # Selecting only the frequent words from the train and test datasets
 freq_words_train <- train[ , freq_words]
@@ -62,14 +67,23 @@ freq_words_test <- test[ , freq_words]
 
 # creating a function for conversion
 convert <- function(x) {x <- ifelse(x > 0, "y", "n")} 
-train <- apply(freq_words_train, MARGIN = 2, convert)
+train_conve <- apply(freq_words_train, MARGIN = 2, convert)
 test <- apply(freq_words_test, MARGIN = 2, convert)
-str(train) # verifying the conversion
+# str(train) # verifying the conversion
+
+
 
 # Creating a Naive Bayes classifier
-sms_classifier <- naiveBayes(train, train_type)
+sms_classifier <- naiveBayes(train_conve, train_type)
+
+
+
+
 # Making prediction & evaluation with the classifier
 test_prediction <- predict(sms_classifier, test)
+tail(test_prediction,1)
+
+confusionMatrix(data=test_prediction, reference = test_type)
 
 CrossTable(test_prediction, test_type, 
            prop.chisq = FALSE, prop.t = FALSE,
@@ -82,4 +96,69 @@ test_prediction_improved <- predict(sms_classifier_improved, test)
 CrossTable(test_prediction_improved, test_type, 
            prop.chisq = FALSE, prop.t = FALSE,
            dnn = c('predicted', 'actual'))
+
+
+#Predecir un texto
+
+# test_txt<-"though some say that life on Mars does exist, I think that there is no life on Mars."
+# 
+# text_corpus_txt <- VCorpus(VectorSource(test_txt))
+# 
+# 
+# 
+# cleanCorpus_txt <- tm_map(text_corpus_txt, content_transformer(tolower)) # lowercase all texts
+# cleanCorpus_txt <- tm_map(cleanCorpus_txt, removeNumbers) # remove all numbers
+# cleanCorpus_txt <- tm_map(cleanCorpus_txt, removeWords, stopwords('english')) # remove all common words such as to, but and etc.
+# cleanCorpus_txt <- tm_map(cleanCorpus_txt, removePunctuation) # remove all punctuation
+# cleanCorpus_txt <- tm_map(cleanCorpus_txt, stripWhitespace) # remove all whitespace
+# 
+# text_dtm_txt <- DocumentTermMatrix(cleanCorpus_txt)
+# inspect(text_dtm_txt)
+# 
+# test_txt <- text_dtm_txt
+# freq_words_txt <- findFreqTerms(test_txt, 5) 
+# 
+# freq_words_test_txt <- test_txt[ , freq_words_txt]
+# 
+# test_txt <- apply(freq_words_test_txt, MARGIN = 2, convert)
+# 
+# 
+# test_prediction <- predict(sms_classifier, test_txt)
+# test_prediction
+# 
+
+
+
+# 
+# 
+# test_txt_df<-paste(as.String(test_txt[1]),sep = ' ' )
+# test_df<-as.data.frame(test_txt_df)
+# 
+# 
+# colnames(test_df)<-c('Msg')
+# 
+# 
+# text_corpus_test <- VCorpus(VectorSource(test_df$Msg))
+# 
+# 
+# lapply(text_corpus_test, as.character) 
+# 
+# cleanCorpus_test_df <- tm_map(text_corpus_test, content_transformer(tolower)) # lowercase all texts
+# cleanCorpus_test_df <- tm_map(cleanCorpus_test_df, removeNumbers) # remove all numbers
+# cleanCorpus_test_df <- tm_map(cleanCorpus_test_df, removeWords, stopwords('english')) # remove all common words such as to, but and etc.
+# cleanCorpus_test_df <- tm_map(cleanCorpus_test_df, removePunctuation) # remove all punctuation
+# cleanCorpus_test_df <- tm_map(cleanCorpus_test_df, stripWhitespace) # remove all whitespace
+# 
+# text_dtm_test <- DocumentTermMatrix(cleanCorpus_test_df)
+# 
+# 
+# inspect(text_dtm_test)
+# 
+# 
+# 
+# 
+# test_prediction_test <- predict(sms_classifier, test_df$Msg)
+# 
+# # example <- confusionMatrix(data=predicted_value, reference = expected_value)
+
 
