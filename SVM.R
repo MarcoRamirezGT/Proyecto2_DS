@@ -46,12 +46,13 @@ View(db)
 # Creating train and test portions 
 porcentaje<-0.7
 set.seed(123)
-corte <- sample(nrow(text_dtm),nrow(text_dtm)*porcentaje)
+corte <- sample(nrow(db),nrow(db)*porcentaje)
 
-train <- text_dtm[corte,] # 70% for training
-test <- text_dtm[-corte, ] # 30% for testing
+train <- db[corte,] # 70% for training
+test <- db[-corte, ] # 30% for testing
 train_type <- db[corte, ]$Tag
 test_type <- db[-corte, ]$Tag
 
 
+model_glm = glm(Tag ~ . , family="binomial", data = train)
 

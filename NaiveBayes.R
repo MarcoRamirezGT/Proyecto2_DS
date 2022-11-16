@@ -19,7 +19,10 @@ db[nrow(db)+1,]<-c(test_txt,'Ineffective')
 
 
 db$Tag<-factor(db$Tag)
+
 # creating our corpus
+
+db_txt<-tail(db,1)
 text_corpus <- VCorpus(VectorSource(db$Msg))
 
 # Viewing the content of more than one texts using lapply() function
@@ -85,17 +88,13 @@ tail(test_prediction,1)
 
 confusionMatrix(data=test_prediction, reference = test_type)
 
-CrossTable(test_prediction, test_type, 
-           prop.chisq = FALSE, prop.t = FALSE,
-           dnn = c('predicted', 'actual'))
-
-#Modelo 2
-sms_classifier_improved <- naiveBayes(train, train_type, laplace = 1)
-test_prediction_improved <- predict(sms_classifier_improved, test)
-
-CrossTable(test_prediction_improved, test_type, 
-           prop.chisq = FALSE, prop.t = FALSE,
-           dnn = c('predicted', 'actual'))
+# #Modelo 2
+# 
+# test_prediction_improved <- predict(sms_classifier_improved, test)
+# 
+# CrossTable(test_prediction_improved, test_type, 
+#            prop.chisq = FALSE, prop.t = FALSE,
+#            dnn = c('predicted', 'actual'))
 
 
 #Predecir un texto
