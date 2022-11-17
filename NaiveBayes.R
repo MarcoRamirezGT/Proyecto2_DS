@@ -15,7 +15,7 @@ test_txt<-"though some say that life on Mars does exist, I think that there is n
 
 db<-db[,c(3,5)]
 colnames(db)<-c('Msg','Tag')
-db[nrow(db)+1,]<-c(test_txt,'Ineffective')
+# db[nrow(db)+1,]<-c(test_txt,'Ineffective')
 
 
 db$Tag<-factor(db$Tag)
@@ -84,7 +84,7 @@ sms_classifier <- naiveBayes(train_conve, train_type)
 
 # Making prediction & evaluation with the classifier
 test_prediction <- predict(sms_classifier, test)
-tail(test_prediction,1)
+# tail(test_prediction,1)
 
 confusionMatrix(data=test_prediction, reference = test_type)
 
