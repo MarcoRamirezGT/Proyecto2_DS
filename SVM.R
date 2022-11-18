@@ -1,6 +1,10 @@
 # install.packages(c("tidyverse", "udpipe", "tm", "tidytext")) # las hemos instalado en capítulos anteriores
 # install.packages(c("caTools", "caret", "randomForest", "rpart", "rpart.plot", "ROSE")) # las usaremos por primera vez
 
+
+randomForestPredic<-function(text_predi){
+  
+
 library(tm)
 library(SnowballC)
 library(wordcloud)
@@ -15,13 +19,33 @@ library(gmodels) #provides CrossTable() function for comparison
 db<-read.csv('train.csv')
 db<-db[,c(1,3,5)]
 colnames(db)<-c('id','oracion','clase_oracion')
-# db[nrow(db)+1,]<-c(test_txt,'Ineffective')
+
+
+
+db_ade<-subset(db,db$clase_oracion=='Adequate')
+db_in<-subset(db,db$clase_oracion=='Ineffective')
+db_ef<-subset(db,db$clase_oracion=='Effective')
+
+db_ade<-head(db_ade,150)
+db_in<-head(db_in,150)
+db_ef<-head(db_ef,150)
+
+db<-rbind(db_ade,db_in,db_ef)
+
+test_txt<-text_predi
+
+db<-rbind(c('0101',test_txt,'Adequate'),db) 
+db<-rbind(db,c('0101',test_txt,'Adequate')) 
+
+# db[nrow(db)+1,]<-c('0101',test_txt,'Adequate')
+# db[nrow(db)+1,]<-c('0102',test_txt,'Ineffective')
+# db[nrow(db)+1,]<-c('0103',test_txt,'Effective')
 
 # db<-head(db,200)
 
 # db$Tag<-factor(db$Tag)
-glimpse(db) # exploramos la estructura de los datos
-table(db$clase_oracion) # vemos la distribución de las clasificaciones
+# glimpse(db) # exploramos la estructura de los datos
+# table(db$clase_oracion) # vemos la distribución de las clasificaciones
 #install.packages("udpipe") # instalamos la libreria
 library(udpipe) # la cargamos
 
@@ -41,7 +65,7 @@ oraciones_anotadas2 <- oraciones_anotadas %>%
   filter(lemma != "bigdata") %>% # sacamos la expresion bigdata que estará en todas las oraciones
   select(doc_id, lemma) # nos quedamos sólo con los lemmas
 
-glimpse(oraciones_anotadas2)
+# glimpse(oraciones_anotadas2)
 
 library(tidytext) # para manejar texto
 library(tm) # para vectorizar
@@ -50,10 +74,8 @@ or_dtm <- oraciones_anotadas2 %>%
   tidytext::cast_dtm(document = doc_id, term = lemma, value = n)
 
 
-or_dtm
-
-or_dtm <- tm::removeSparseTerms(or_dtm, sparse = .98)
-or_dtm
+# or_dtm <- tm::removeSparseTerms(or_dtm, sparse = .98)
+# 
 
 set.seed(100) # seteamos una semilla, para poder reproducir los resultados
 
@@ -76,11 +98,18 @@ or_rf = randomForest(clase_oracion ~ ., data=or_train) # generar modelo
 or_rf_predict = predict(object=or_rf, newdata=or_test) # predecimos con tabla test, para evaluar contra real
 
 
-View(or_rf_predict)
+return(or_rf_predict)
 
-confusionMatrix(or_test$clase_oracion,or_rf_predict)
+}
 
-test_txt<-("though some say that life on Mars does exist, I think that there is no life on Mars.")
+
+
+# 
+# View(or_rf_predict)
+# 
+# confusionMatrix(or_test$clase_oracion,or_rf_predict)
+# 
+# test_txt<-("though some say that life on Mars does exist, I think that there is no life on Mars.")
 
 ### Prediccion de texto
 # 
