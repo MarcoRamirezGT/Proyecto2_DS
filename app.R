@@ -16,7 +16,7 @@ ui <- dashboardPage(
     
     fluidRow(
       box(
-        title = "Proyecto 2",
+        title = "Argumentos efectivos",
         background = "red",
         icon = icon("folder-open", lib = "glyphicon"),
         textInput('texto','Texto a predecir',' '),
@@ -76,7 +76,7 @@ ui <- dashboardPage(
       id = "myforest",
       collapsible = TRUE,
       closable = TRUE,
-      
+      textOutput('prec_random'),
       valueBox(56, "%", color = "orange"),
       icon = icon("tree-deciduous", lib = "glyphicon")
     )
@@ -137,6 +137,14 @@ server <- function(input, output, session) {
     if(input$inputId_Bayes){
       source('NaiveBayes.R')
       paste(naiveBayesFun_Ac(input$texto))
+    }
+    
+  })
+  output$prec_random<-renderText({
+    
+    if(input$inputId_Bayes){
+      source('SVM.R')
+      paste(randomForestPredic_Acc(input$texto))
     }
     
   })
