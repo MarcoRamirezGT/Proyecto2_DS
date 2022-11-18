@@ -7,13 +7,18 @@ library(shinydashboardPlus)
 ui <- dashboardPage(
   skin = "red",
   title = "Proyecto 2",
-  dashboardHeader(title='Proyecto 2',  titleWidth = 700),
-  dashboardSidebar(disable=TRUE),
+  
+  dashboardHeader(disable = TRUE),
+  dashboardSidebar(disable = TRUE),
+  
   dashboardBody(
     tags$style("body { background-color: ghostwhite}"),
     
     fluidRow(
       box(
+        title = "Proyecto 2",
+        background = "red",
+        icon = icon("folder-open", lib = "glyphicon"),
         textInput('texto','Texto a predecir',' '),
         textOutput("text"),
         verbatimTextOutput('value'),
@@ -26,14 +31,16 @@ ui <- dashboardPage(
         title = 'Eficiencia Naive Bayes',
         id='mynaiveR',
         textOutput('text_naive_head'),
-        background = "teal"
+        background = "teal",
+        icon = icon("stats", lib = "glyphicon")
         
       ),
       box(
         title = 'Eficiencia Random Forest',
         id='myrandomR',
         textOutput('text_random_head'),
-        background = "orange"
+        background = "teal",
+        icon = icon("tree-deciduous", lib = "glyphicon")
         
       ),
       
@@ -42,9 +49,9 @@ ui <- dashboardPage(
       
       box(
       
-        actionButton("restore_box", "Eficiencia Naive Bayes", class = "bg-success", icon("ok", lib = "glyphicon"),
+        actionButton("restore_box", "Eficiencia Naive Bayes", class = "bg-success", icon("hand-up", lib = "glyphicon"),
           style="color: #fff; background-color: #f24b59; border-color: #f24b4b"),
-        actionButton("forest_box", "Eficiencia Random Forest", class = "bg-forest", icon("ok", lib = "glyphicon"),
+        actionButton("forest_box", "Eficiencia Random Forest", class = "bg-forest", icon("hand-up", lib = "glyphicon"),
                      style="color: #fff; background-color: #f24b59; border-color: #f24b4b")
       
       ),
@@ -59,7 +66,7 @@ ui <- dashboardPage(
       closable = TRUE,
       # infoBoxOutput("progressBox"),
       
-      valueBox(59, "%", color = "teal"),
+      valueBox(59, "%", color = "orange"),
       textOutput('prec_naive'),
       icon = icon("stats", lib = "glyphicon")
     ),
